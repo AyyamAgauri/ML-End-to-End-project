@@ -6,6 +6,8 @@ from src.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from src.components.Data_Transform import DataTransformConfig
+from src.components.Data_Transform import DataTransformer
 
 @dataclass #Automatically generates special methods for classes like __init__.
 
@@ -57,4 +59,7 @@ class DataIngestion:
 
 if __name__ == '__main__':
     obj = DataIngestion()
-    obj.main_func()
+    train_data, test_data = obj.main_func()
+
+    data_transformation = DataTransformer()
+    data_transformation.intiate_data_transform(train_data,test_data)
