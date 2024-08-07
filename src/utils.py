@@ -9,11 +9,12 @@ from src.exception import CustomException
 #for the creation of pkl file
 def save_object(file_path, obj):
     try:
-        dir_name = os.path.dirname(file_path)
+        dir_path = os.path.dirname(file_path)
 
-        os.makedirs(dir_name,exist_ok=True)
-        
-        with open(dir_name,'wb') as f:
-            dill.dump(obj,f)
+        os.makedirs(dir_path, exist_ok=True)
+
+        with open(file_path, "wb") as file_obj:
+            dill.dump(obj, file_obj)
+
     except Exception as e:
-        raise CustomException(e,sys)
+        raise CustomException(e, sys)
