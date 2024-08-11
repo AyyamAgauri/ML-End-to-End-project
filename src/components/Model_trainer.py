@@ -2,7 +2,6 @@ import os
 import sys
 from dataclasses import dataclass
 
-from catboost import CatBoostRegressor
 from xgboost import XGBRegressor
 from sklearn.ensemble import (
     AdaBoostRegressor,
@@ -48,7 +47,6 @@ class ModelTrainer:
                 'K-Nearest Neighbours' : KNeighborsRegressor(),
                 'XgBoost Regressor' : XGBRegressor(),
                 'SVM' : SVR(),
-                'CatBoost Regressor' : CatBoostRegressor(),
                 'AdaBoost Regressor' : AdaBoostRegressor()
             }
 
@@ -74,6 +72,14 @@ class ModelTrainer:
             
             logging.info(f'Best model found {best_model} with r2_score {best_model_score}')
 
-            
-        except:
-            pass
+            save_object(
+                file_path=self.model_trainer_config.trained_model_file_path,
+                obj=best_model
+            )
+
+            predicted = best_model.predict(X_test)
+            r2 = r2_score(y_test,predicted)
+
+            return r2
+        except Exception as e:
+            raise CustomException(e,sys)
