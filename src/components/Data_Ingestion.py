@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.components.Data_Transform import DataTransformConfig
 from src.components.Data_Transform import DataTransformer
+from src.components.Model_trainer import ModelTrainer
+from src.components.Model_trainer import ModelTrainerConfig
 
 @dataclass #Automatically generates special methods for classes like __init__.
 
@@ -62,4 +64,7 @@ if __name__ == '__main__':
     train_data, test_data = obj.main_func()
 
     data_transformation = DataTransformer()
-    data_transformation.intiate_data_transform(train_data,test_data)
+    train_arr,test_arr,_ = data_transformation.intiate_data_transform(train_data,test_data)
+
+    modeltrainer = ModelTrainer()
+    modeltrainer.initiate_model_trainer(test_arr,test_arr)
