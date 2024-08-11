@@ -6,6 +6,7 @@ import sys
 import dill
 from src.exception import CustomException
 from sklearn.metrics import r2_score
+from sklearn.model_selection import GridSearchCV
 
 #for the creation of pkl file
 def save_object(file_path, obj):
@@ -30,6 +31,14 @@ def evaluate_model(X_train,y_train,X_test,y_test,models):
         for i in range(len(models)):
             #Accessing every model present one by one
             model = list(models.values())[i]
+
+            #Hyperparameter Tuning
+            # gs = GridSearchCV(model,cv=3)
+            # gs.fit(X_train,y_train)
+
+            #Setting the best hyperparameter
+            # model.set_params(**gs.best_params_)
+
             #Training model
             model.fit(X_train,y_train)
             #Train Output prediction

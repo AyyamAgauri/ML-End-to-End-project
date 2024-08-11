@@ -54,8 +54,7 @@ class ModelTrainer:
                                                y_train=y_train,
                                                X_test=X_test,
                                                y_test=y_test,
-                                               models=models
-            )
+                                               models=models            )
 
             #Get the Best r2_score from report dict
             best_model_score = max(sorted(model_report.values()))
@@ -80,6 +79,6 @@ class ModelTrainer:
             predicted = best_model.predict(X_test)
             r2 = r2_score(y_test,predicted)
 
-            return r2
+            return r2,best_model_name
         except Exception as e:
             raise CustomException(e,sys)
